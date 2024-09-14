@@ -1,4 +1,4 @@
-package qrnng
+package qrng
 
 import (
 	"encoding/json"
