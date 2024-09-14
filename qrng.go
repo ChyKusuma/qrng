@@ -50,7 +50,8 @@ func GetQuantumRandomNumbers(length int) ([]int, error) {
 
 
 func main() {
-	randomNumbers, err := getQuantumRandomNumbers()
+	length := 16 // Specify the desired length of random numbers
+	randomNumbers, err := GetQuantumRandomNumbers(length)
 	if err != nil {
 		fmt.Println("Error fetching QRNG data:", err)
 		return
