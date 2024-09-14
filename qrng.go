@@ -15,9 +15,9 @@ type QRNGResponse struct {
 	Success bool   `json:"success"`
 }
 
-func getQuantumRandomNumbers() ([]int, error) {
+func GetQuantumRandomNumbers(length int) ([]int, error) {
 	// URL for ANU QRNG
-	url := "https://qrng.anu.edu.au/API/jsonI.php?length=10&type=uint8"
+	url := fmt.Sprintf("https://qrng.anu.edu.au/API/jsonI.php?length=%d&type=uint8", length)
 
 	// Create a new HTTP request
 	resp, err := http.Get(url)
@@ -37,9 +37,6 @@ func getQuantumRandomNumbers() ([]int, error) {
 		return nil, err
 	}
 
-	// Print the raw response body for debugging
-	fmt.Println("Response Body:", string(body))
-
 	// Parse the JSON response
 	var qrngResponse QRNGResponse
 	err = json.Unmarshal(body, &qrngResponse)
@@ -50,6 +47,7 @@ func getQuantumRandomNumbers() ([]int, error) {
 	// Return the random data
 	return qrngResponse.Data, nil
 }
+
 
 func main() {
 	randomNumbers, err := getQuantumRandomNumbers()
